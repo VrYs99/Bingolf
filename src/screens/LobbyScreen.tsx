@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   grayOut: {
-    ...StyleSheet.absoluteFill,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.grayOut,
     borderRadius: 9,
   },

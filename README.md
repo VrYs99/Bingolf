@@ -4,6 +4,8 @@ Jeu mobile **Bingo + Golf** pour iOS et Android (Expo / React Native).
 
 Prototype UI basé sur le Figma [Bingolf-Alpha-prototype](https://www.figma.com/design/oxPycpGnZMTJtdQ7GIpkhl/Bingolf-Alpha-prototype).
 
+Stack : **Expo SDK 54** (compatible Expo Go iOS/Android).
+
 ## Mode Solo (MVP)
 
 Flux actuel :
