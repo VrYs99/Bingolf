@@ -1,0 +1,17 @@
+export const colors = {
+  greenFrom: '#48FF9A',
+  greenTo: '#23BAA8',
+  greenDark: '#0E4741',
+  mediumFrom: '#FFF950',
+  mediumTo: '#E38112',
+  mediumBorder: '#BA7323',
+  hardFrom: '#E57E17',
+  hardTo: '#F01212',
+  glassWhite: 'rgba(255,255,255,0.26)',
+  glassPanelFrom: 'rgba(255,255,255,0.27)',
+  glassPanelMid: 'rgba(238,255,245,0.5)',
+  glassPanelTo: 'rgba(72,255,154,0.5)',
+  grayOut: 'rgba(29,22,85,0.52)',
+  white: '#FFFFFF',
+  textShadow: 'rgba(0,0,0,0.25)',
+};

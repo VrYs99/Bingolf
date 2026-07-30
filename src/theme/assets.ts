@@ -1,0 +1,18 @@
+export const images = {
+  bgGolf: require('../../assets/images/bg-golf.jpg'),
+  avatar: require('../../assets/images/avatar.png'),
+  iconSolo: require('../../assets/images/icon-solo.png'),
+  iconDuel: require('../../assets/images/icon-duel.png'),
+  iconFoursome: require('../../assets/images/icon-foursome.png'),
+  iconTrophy: require('../../assets/images/icon-trophy.png'),
+  iconSettings: require('../../assets/images/icon-settings.png'),
+  iconLobby: require('../../assets/images/icon-lobby.png'),
+  iconSettingsNav: require('../../assets/images/icon-settings-nav.png'),
+  iconSearch: require('../../assets/images/icon-search.png'),
+  bingoGridBg: require('../../assets/images/bingo-grid-bg.png'),
+  golfBall: require('../../assets/images/golf-ball.png'),
+  flag: require('../../assets/images/flag.png'),
+  friend1: require('../../assets/images/friend-1.png'),
+  friend2: require('../../assets/images/friend-2.png'),
+  friend3: require('../../assets/images/friend-3.png'),
+};
