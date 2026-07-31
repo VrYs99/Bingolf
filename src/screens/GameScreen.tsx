@@ -72,45 +72,53 @@ export function GameScreen({ navigation, route }: Props) {
           </Text>
         </View>
 
-        <View style={styles.bingoHeader}>
-          <Text style={styles.bingoTitle}>BING</Text>
-          <Image source={images.golfBall} style={styles.bingoBall} />
-        </View>
-
-        <View style={styles.gridFrame}>
-          <ImageBackground
-            source={images.bingoGridBg}
-            style={styles.grid}
-            imageStyle={styles.gridImage}
-          >
-            {Array.from({ length: 5 }, (_, row) => (
-              <View key={`row-${row}`} style={styles.gridRow}>
-                {cells.slice(row * 5, row * 5 + 5).map((cell, col) => (
-                  <Pressable
-                    key={cell.id}
-                    style={[
-                      styles.cell,
-                      row < 4 && styles.cellBorderBottom,
-                      col < 4 && styles.cellBorderRight,
-                      cell.marked && styles.cellMarked,
-                    ]}
-                    onPress={() => {
-                      if (cell.number === 'FREE' || cell.marked) return;
-                      markNumber(cell.number);
-                    }}
-                  >
-                    {cell.number === 'FREE' ? (
-                      <Image source={images.flag} style={styles.flag} />
-                    ) : cell.marked ? (
-                      <NumberBadge number={cell.number} size={42} />
-                    ) : (
-                      <Text style={styles.cellNumber}>{cell.number}</Text>
-                    )}
-                  </Pressable>
-                ))}
+        <View style={styles.cardBlock}>
+          <View style={styles.bingoHeader}>
+            {(['B', 'I', 'N', 'G'] as const).map((letter) => (
+              <View key={letter} style={styles.bingoHeaderCell}>
+                <Text style={styles.bingoTitle}>{letter}</Text>
               </View>
             ))}
-          </ImageBackground>
+            <View style={styles.bingoHeaderCell}>
+              <Image source={images.golfBall} style={styles.bingoBall} />
+            </View>
+          </View>
+
+          <View style={styles.gridFrame}>
+            <ImageBackground
+              source={images.bingoGridBg}
+              style={styles.grid}
+              imageStyle={styles.gridImage}
+            >
+              {Array.from({ length: 5 }, (_, row) => (
+                <View key={`row-${row}`} style={styles.gridRow}>
+                  {cells.slice(row * 5, row * 5 + 5).map((cell, col) => (
+                    <Pressable
+                      key={cell.id}
+                      style={[
+                        styles.cell,
+                        row < 4 && styles.cellBorderBottom,
+                        col < 4 && styles.cellBorderRight,
+                        cell.marked && styles.cellMarked,
+                      ]}
+                      onPress={() => {
+                        if (cell.number === 'FREE' || cell.marked) return;
+                        markNumber(cell.number);
+                      }}
+                    >
+                      {cell.number === 'FREE' ? (
+                        <Image source={images.flag} style={styles.flag} />
+                      ) : cell.marked ? (
+                        <NumberBadge number={cell.number} size={42} />
+                      ) : (
+                        <Text style={styles.cellNumber}>{cell.number}</Text>
+                      )}
+                    </Pressable>
+                  ))}
+                </View>
+              ))}
+            </ImageBackground>
+          </View>
         </View>
 
         <Text style={styles.challengesTitle}>CHALLENGES</Text>
@@ -166,24 +174,32 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
+  cardBlock: {
+    width: '100%',
+  },
   bingoHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
-    gap: 4,
+    marginBottom: 6,
+    // Match gridFrame border (4) + grid padding (8) so letters sit over columns
+    paddingHorizontal: 12,
+  },
+  bingoHeaderCell: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bingoTitle: {
     color: colors.greenFrom,
-    fontSize: 42,
+    fontSize: 40,
     fontWeight: '900',
-    letterSpacing: 4,
     textShadowColor: colors.white,
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 4,
   },
   bingoBall: {
-    width: 48,
-    height: 48,
+    width: 44,
+    height: 44,
     resizeMode: 'contain',
   },
   gridFrame: {
