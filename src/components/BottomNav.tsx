@@ -1,7 +1,7 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LobbyIcon, SettingsIcon } from './ModeIcons';
 import { GreenButton } from './ui';
-import { images } from '../theme/assets';
 import { colors } from '../theme/colors';
 
 type Props = {
@@ -24,7 +24,7 @@ export function BottomNav({
       <Pressable onPress={onLobby}>
         <GreenButton style={styles.btn}>
           <Text style={styles.label}>Lobby</Text>
-          <Image source={images.iconLobby} style={styles.icon} />
+          <LobbyIcon width={18} height={22} />
         </GreenButton>
       </Pressable>
 
@@ -39,7 +39,7 @@ export function BottomNav({
       <Pressable onPress={onSettings}>
         <GreenButton style={[styles.btn, styles.settings]}>
           <Text style={styles.label}>Settings</Text>
-          <Image source={images.iconSettingsNav} style={styles.iconSettings} />
+          <SettingsIcon width={18} height={18} />
         </GreenButton>
       </Pressable>
     </View>
@@ -76,15 +76,5 @@ const styles = StyleSheet.create({
     color: colors.greenDark,
     fontWeight: '700',
     fontSize: 15,
-  },
-  icon: {
-    width: 18,
-    height: 22,
-    resizeMode: 'contain',
-  },
-  iconSettings: {
-    width: 18,
-    height: 18,
-    resizeMode: 'contain',
   },
 });
