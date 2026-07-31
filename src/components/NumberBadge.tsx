@@ -9,7 +9,8 @@ type Props = {
 
 export function NumberBadge({ number, size = 36 }: Props) {
   const badgeSize = Math.round(size * 0.62);
-  const fontSize = badgeSize >= 28 ? 14 : badgeSize >= 20 ? 11 : 9;
+  const fontSize =
+    badgeSize >= 32 ? 16 : badgeSize >= 28 ? 14 : badgeSize >= 20 ? 11 : 9;
 
   return (
     <View style={[styles.wrap, { width: size, height: size }]}>

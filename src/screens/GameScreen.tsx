@@ -114,7 +114,7 @@ export function GameScreen({ navigation, route }: Props) {
                           {cell.number === 'FREE' ? (
                             <Image source={images.flag} style={styles.flag} />
                           ) : cell.marked ? (
-                            <NumberBadge number={cell.number} size={42} />
+                            <NumberBadge number={cell.number} size={54} />
                           ) : (
                             <Text style={styles.cellNumber}>{cell.number}</Text>
                           )}
