@@ -16,6 +16,7 @@ const GRID_LINE_COLOR = 'rgba(255,255,255,0.42)';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomNav } from '../components/BottomNav';
+import { LandingBall } from '../components/LandingBall';
 import { NumberBadge } from '../components/NumberBadge';
 import { GlassPanel, GreenButton, ScreenBackground } from '../components/ui';
 import {
@@ -46,10 +47,13 @@ export function GameScreen({ navigation, route }: Props) {
 
     if (!won && hasBingo(nextCells)) {
       setWon(true);
-      Alert.alert('BINGOLF!', `Solo ${setup.difficulty} gagné sur ${setup.location}`, [
-        { text: 'Lobby', onPress: () => navigation.navigate('Lobby') },
-        { text: 'Continuer' },
-      ]);
+      // Let the ball land before the alert covers the grid
+      setTimeout(() => {
+        Alert.alert('BINGOLF!', `Solo ${setup.difficulty} gagné sur ${setup.location}`, [
+          { text: 'Lobby', onPress: () => navigation.navigate('Lobby') },
+          { text: 'Continuer' },
+        ]);
+      }, 850);
     }
   };
 
@@ -114,7 +118,7 @@ export function GameScreen({ navigation, route }: Props) {
                           {cell.number === 'FREE' ? (
                             <Image source={images.flag} style={styles.flag} />
                           ) : cell.marked ? (
-                            <NumberBadge number={cell.number} size={54} />
+                            <LandingBall number={cell.number} size={54} />
                           ) : (
                             <Text style={styles.cellNumber}>{cell.number}</Text>
                           )}
