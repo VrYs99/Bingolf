@@ -35,7 +35,12 @@ export function GlassPanel({ children, style }: PanelProps) {
       locations={[0, 0.64, 1]}
       style={[styles.panel, style]}
     >
-      <BlurView intensity={25} tint="light" style={StyleSheet.absoluteFill} />
+      <BlurView
+        intensity={25}
+        tint="light"
+        style={StyleSheet.absoluteFill}
+        pointerEvents="none"
+      />
       <View style={styles.panelContent}>{children}</View>
     </LinearGradient>
   );

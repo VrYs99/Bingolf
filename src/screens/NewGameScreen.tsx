@@ -93,17 +93,22 @@ export function NewGameScreen({ navigation }: Props) {
                   key={item.key}
                   style={styles.diffPress}
                   onPress={() => setDifficulty(item.key)}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected }}
+                  hitSlop={4}
                 >
                   <LinearGradient
                     colors={item.colors}
                     style={[
                       styles.diffCard,
                       { borderColor: item.border },
-                      selected && styles.diffSelected,
+                      selected ? styles.diffSelected : styles.diffUnselected,
                     ]}
+                    pointerEvents="none"
                   >
                     <Text style={styles.diffRange}>{item.range}</Text>
                     <Text style={styles.diffLabel}>{item.key}</Text>
+                    {selected ? <Text style={styles.diffCheck}>✓</Text> : null}
                   </LinearGradient>
                 </Pressable>
               );
@@ -203,13 +208,19 @@ const styles = StyleSheet.create({
   diffCard: {
     height: 101,
     borderRadius: 9,
-    borderWidth: 1,
+    borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 4,
+    position: 'relative',
   },
   diffSelected: {
-    transform: [{ scale: 1.03 }],
+    opacity: 1,
+    borderWidth: 3,
+    transform: [{ scale: 1.02 }],
+  },
+  diffUnselected: {
+    opacity: 0.72,
   },
   diffRange: {
     color: colors.greenDark,
@@ -220,6 +231,17 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
     fontSize: 14,
+  },
+  diffCheck: {
+    position: 'absolute',
+    top: 6,
+    right: 8,
+    color: colors.white,
+    fontWeight: '900',
+    fontSize: 14,
+    textShadowColor: 'rgba(0,0,0,0.35)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   locationPanel: {
     minHeight: 154,
