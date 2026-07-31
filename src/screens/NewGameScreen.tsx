@@ -153,8 +153,10 @@ export function NewGameScreen({ navigation }: Props) {
           </View>
           {PREVIEW_CHALLENGES.map((item) => (
             <View key={item.number} style={styles.challengeRow}>
-              <NumberBadge number={item.number} size={28} />
-              <Text style={styles.challengeTitle}>{item.title}</Text>
+              <NumberBadge number={item.number} size={32} />
+              <Text style={styles.challengeTitle} numberOfLines={1}>
+                {item.title}
+              </Text>
             </View>
           ))}
         </GlassPanel>
@@ -299,10 +301,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 9,
     minHeight: 49,
+    height: 49,
     paddingHorizontal: 12,
     marginBottom: 8,
+    overflow: 'hidden',
   },
   challengeTitle: {
+    flex: 1,
     color: colors.white,
     fontWeight: '700',
     fontSize: 16,
