@@ -1,7 +1,6 @@
 export const images = {
   bgGolf: require('../../assets/images/bg-golf.jpg'),
   avatar: require('../../assets/images/avatar.png'),
-  iconTrophy: require('../../assets/images/icon-trophy.png'),
   iconSettings: require('../../assets/images/icon-settings.png'),
   iconLobby: require('../../assets/images/icon-lobby.png'),
   iconSettingsNav: require('../../assets/images/icon-settings-nav.png'),

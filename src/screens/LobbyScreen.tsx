@@ -1,7 +1,7 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DuelIcon, FoursomeIcon, SoloIcon } from '../components/ModeIcons';
+import { DuelIcon, FoursomeIcon, SoloIcon, TrophyIcon } from '../components/ModeIcons';
 import { GlassPanel, GreenButton, ScreenBackground } from '../components/ui';
 import { FRIENDS, PLAYER, UPDATES } from '../data/solo';
 import { images } from '../theme/assets';
@@ -35,7 +35,7 @@ export function LobbyScreen({ navigation }: Props) {
             <View style={styles.profileRow}>
               <GreenButton style={styles.achievement}>
                 <Text style={styles.achievementText}>Achievement</Text>
-                <Image source={images.iconTrophy} style={styles.trophy} />
+                <TrophyIcon width={16} height={17} />
               </GreenButton>
               <Text style={styles.points}>
                 {PLAYER.points} <Text style={styles.pts}>pts</Text>
@@ -165,11 +165,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 10,
     fontWeight: '700',
-  },
-  trophy: {
-    width: 14,
-    height: 14,
-    resizeMode: 'contain',
   },
   points: {
     color: '#1a1a1a',
