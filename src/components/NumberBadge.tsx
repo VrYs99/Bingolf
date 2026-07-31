@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { images } from '../theme/assets';
 import { colors } from '../theme/colors';
 
@@ -8,15 +8,14 @@ type Props = {
 };
 
 export function NumberBadge({ number, size = 36 }: Props) {
-  const fontSize = size >= 48 ? 16 : size >= 32 ? 12 : 10;
-  const badgeSize = Math.round(size * 0.58);
-  const badgeOffset = (size - badgeSize) / 2;
+  const badgeSize = Math.round(size * 0.62);
+  const fontSize = badgeSize >= 28 ? 14 : badgeSize >= 20 ? 11 : 9;
 
   return (
     <View style={[styles.wrap, { width: size, height: size }]}>
       <Image
         source={images.golfBall}
-        style={{ width: size, height: size }}
+        style={styles.ball}
         resizeMode="contain"
       />
       <View
@@ -26,13 +25,22 @@ export function NumberBadge({ number, size = 36 }: Props) {
             width: badgeSize,
             height: badgeSize,
             borderRadius: badgeSize / 2,
-            top: badgeOffset,
-            left: badgeOffset,
           },
         ]}
       >
-        <Text style={[styles.text, { fontSize }]} numberOfLines={1}>
-          {number}
+        <Text
+          allowFontScaling={false}
+          style={[
+            styles.text,
+            {
+              fontSize,
+              lineHeight: fontSize,
+              width: badgeSize,
+              height: fontSize,
+            },
+          ]}
+        >
+          {String(number)}
         </Text>
       </View>
     </View>
@@ -41,27 +49,31 @@ export function NumberBadge({ number, size = 36 }: Props) {
 
 const styles = StyleSheet.create({
   wrap: {
-    position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     flexShrink: 0,
   },
+  ball: {
+    ...StyleSheet.absoluteFillObject,
+    width: '100%',
+    height: '100%',
+  },
   badge: {
-    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.greenFrom,
     borderWidth: 1,
     borderColor: colors.greenTo,
-    alignItems: 'center',
-    justifyContent: 'center',
+    overflow: 'hidden',
   },
   text: {
     color: colors.white,
-    fontWeight: '700',
+    fontWeight: '800',
     textAlign: 'center',
     includeFontPadding: false,
-    textShadowColor: colors.textShadow,
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
+    textAlignVertical: 'center',
+    ...(Platform.OS === 'ios' ? { marginTop: 0 } : { marginTop: -0.5 }),
+    padding: 0,
   },
 });
