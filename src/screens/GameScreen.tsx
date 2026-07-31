@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import {
   Alert,
   Image,
@@ -9,6 +9,10 @@ import {
   Text,
   View,
 } from 'react-native';
+
+/** Wide frosted gutters matching Figma Layer_1 grid */
+const GRID_LINE = 7;
+const GRID_LINE_COLOR = 'rgba(255,255,255,0.42)';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomNav } from '../components/BottomNav';
@@ -91,31 +95,34 @@ export function GameScreen({ navigation, route }: Props) {
               imageStyle={styles.gridImage}
             >
               {Array.from({ length: 5 }, (_, row) => (
-                <View key={`row-${row}`} style={styles.gridRow}>
-                  {cells.slice(row * 5, row * 5 + 5).map((cell, col) => (
-                    <Pressable
-                      key={cell.id}
-                      style={[
-                        styles.cell,
-                        row < 4 && styles.cellBorderBottom,
-                        col < 4 && styles.cellBorderRight,
-                        cell.marked && styles.cellMarked,
-                      ]}
-                      onPress={() => {
-                        if (cell.number === 'FREE' || cell.marked) return;
-                        markNumber(cell.number);
-                      }}
-                    >
-                      {cell.number === 'FREE' ? (
-                        <Image source={images.flag} style={styles.flag} />
-                      ) : cell.marked ? (
-                        <NumberBadge number={cell.number} size={42} />
-                      ) : (
-                        <Text style={styles.cellNumber}>{cell.number}</Text>
-                      )}
-                    </Pressable>
-                  ))}
-                </View>
+                <Fragment key={`row-${row}`}>
+                  {row > 0 ? <View style={styles.gridLineH} /> : null}
+                  <View style={styles.gridRow}>
+                    {cells.slice(row * 5, row * 5 + 5).map((cell, col) => (
+                      <Fragment key={cell.id}>
+                        {col > 0 ? <View style={styles.gridLineV} /> : null}
+                        <Pressable
+                          style={[
+                            styles.cell,
+                            cell.marked && styles.cellMarked,
+                          ]}
+                          onPress={() => {
+                            if (cell.number === 'FREE' || cell.marked) return;
+                            markNumber(cell.number);
+                          }}
+                        >
+                          {cell.number === 'FREE' ? (
+                            <Image source={images.flag} style={styles.flag} />
+                          ) : cell.marked ? (
+                            <NumberBadge number={cell.number} size={42} />
+                          ) : (
+                            <Text style={styles.cellNumber}>{cell.number}</Text>
+                          )}
+                        </Pressable>
+                      </Fragment>
+                    ))}
+                  </View>
+                </Fragment>
               ))}
             </ImageBackground>
           </View>
@@ -181,8 +188,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
-    // Match gridFrame border (4) + grid padding (8) so letters sit over columns
-    paddingHorizontal: 12,
+    // Match gridFrame border (7) + grid padding (6) so letters sit over columns
+    paddingHorizontal: 13,
   },
   bingoHeaderCell: {
     flex: 1,
@@ -205,11 +212,11 @@ const styles = StyleSheet.create({
   gridFrame: {
     width: '100%',
     aspectRatio: 1,
-    borderRadius: 25,
-    borderWidth: 4,
-    borderColor: colors.white,
+    borderRadius: 28,
+    borderWidth: 7,
+    borderColor: 'rgba(255,255,255,0.72)',
     overflow: 'hidden',
-    backgroundColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: 'rgba(255,255,255,0.08)',
     shadowColor: '#000',
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -217,7 +224,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     flex: 1,
-    padding: 8,
+    padding: 6,
   },
   gridImage: {
     borderRadius: 21,
@@ -226,19 +233,18 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
+  gridLineH: {
+    height: GRID_LINE,
+    backgroundColor: GRID_LINE_COLOR,
+  },
+  gridLineV: {
+    width: GRID_LINE,
+    backgroundColor: GRID_LINE_COLOR,
+  },
   cell: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-  },
-  cellBorderRight: {
-    borderRightWidth: 2,
-    borderRightColor: 'rgba(255,255,255,0.92)',
-  },
-  cellBorderBottom: {
-    borderBottomWidth: 2,
-    borderBottomColor: 'rgba(255,255,255,0.92)',
   },
   cellMarked: {
     backgroundColor: 'rgba(72,255,154,0.28)',
