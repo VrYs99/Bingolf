@@ -1,6 +1,7 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { DuelIcon, FoursomeIcon, SoloIcon } from '../components/ModeIcons';
 import { GlassPanel, GreenButton, ScreenBackground } from '../components/ui';
 import { FRIENDS, PLAYER, UPDATES } from '../data/solo';
 import { images } from '../theme/assets';
@@ -52,22 +53,14 @@ export function LobbyScreen({ navigation }: Props) {
               onPress={() => navigation.navigate('NewGame')}
             >
               <GreenButton style={styles.modeCard}>
-                <Image
-                  source={images.iconSolo}
-                  style={styles.modeIconSolo}
-                  accessibilityLabel="Solo"
-                />
+                <SoloIcon width={34} height={44} />
                 <Text style={styles.modeLabel}>SOLO</Text>
               </GreenButton>
             </Pressable>
 
             <View style={styles.modePress}>
               <GreenButton style={styles.modeCard}>
-                <Image
-                  source={images.iconDuel}
-                  style={styles.modeIconDuel}
-                  accessibilityLabel="Duel"
-                />
+                <DuelIcon width={40} height={42} />
                 <Text style={styles.modeLabel}>DUEL</Text>
               </GreenButton>
               <View style={styles.grayOut} pointerEvents="none" />
@@ -78,11 +71,7 @@ export function LobbyScreen({ navigation }: Props) {
 
             <View style={styles.modePress}>
               <GreenButton style={styles.modeCard}>
-                <Image
-                  source={images.iconFoursome}
-                  style={styles.modeIconFoursome}
-                  accessibilityLabel="Foursome"
-                />
+                <FoursomeIcon width={48} height={42} />
                 <Text style={styles.modeLabel}>FOURSOME</Text>
               </GreenButton>
               <View style={styles.grayOut} pointerEvents="none" />
@@ -226,21 +215,6 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingTop: 10,
     paddingBottom: 8,
-  },
-  modeIconSolo: {
-    width: 34,
-    height: 44,
-    resizeMode: 'contain',
-  },
-  modeIconDuel: {
-    width: 40,
-    height: 42,
-    resizeMode: 'contain',
-  },
-  modeIconFoursome: {
-    width: 48,
-    height: 42,
-    resizeMode: 'contain',
   },
   modeLabel: {
     color: colors.white,
