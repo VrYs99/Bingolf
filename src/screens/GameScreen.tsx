@@ -77,30 +77,41 @@ export function GameScreen({ navigation, route }: Props) {
           <Image source={images.golfBall} style={styles.bingoBall} />
         </View>
 
-        <ImageBackground
-          source={images.bingoGridBg}
-          style={styles.grid}
-          imageStyle={styles.gridImage}
-        >
-          {cells.map((cell) => (
-            <Pressable
-              key={cell.id}
-              style={[styles.cell, cell.marked && styles.cellMarked]}
-              onPress={() => {
-                if (cell.number === 'FREE' || cell.marked) return;
-                markNumber(cell.number);
-              }}
-            >
-              {cell.number === 'FREE' ? (
-                <Image source={images.flag} style={styles.flag} />
-              ) : cell.marked ? (
-                <NumberBadge number={cell.number} size={48} />
-              ) : (
-                <Text style={styles.cellNumber}>{cell.number}</Text>
-              )}
-            </Pressable>
-          ))}
-        </ImageBackground>
+        <View style={styles.gridFrame}>
+          <ImageBackground
+            source={images.bingoGridBg}
+            style={styles.grid}
+            imageStyle={styles.gridImage}
+          >
+            {Array.from({ length: 5 }, (_, row) => (
+              <View key={`row-${row}`} style={styles.gridRow}>
+                {cells.slice(row * 5, row * 5 + 5).map((cell, col) => (
+                  <Pressable
+                    key={cell.id}
+                    style={[
+                      styles.cell,
+                      row < 4 && styles.cellBorderBottom,
+                      col < 4 && styles.cellBorderRight,
+                      cell.marked && styles.cellMarked,
+                    ]}
+                    onPress={() => {
+                      if (cell.number === 'FREE' || cell.marked) return;
+                      markNumber(cell.number);
+                    }}
+                  >
+                    {cell.number === 'FREE' ? (
+                      <Image source={images.flag} style={styles.flag} />
+                    ) : cell.marked ? (
+                      <NumberBadge number={cell.number} size={42} />
+                    ) : (
+                      <Text style={styles.cellNumber}>{cell.number}</Text>
+                    )}
+                  </Pressable>
+                ))}
+              </View>
+            ))}
+          </ImageBackground>
+        </View>
 
         <Text style={styles.challengesTitle}>CHALLENGES</Text>
         <GlassPanel style={styles.challengesPanel}>
@@ -175,42 +186,58 @@ const styles = StyleSheet.create({
     height: 48,
     resizeMode: 'contain',
   },
-  grid: {
+  gridFrame: {
     width: '100%',
     aspectRatio: 1,
     borderRadius: 25,
     borderWidth: 4,
     borderColor: colors.white,
     overflow: 'hidden',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: 6,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 4 },
+  },
+  grid: {
+    flex: 1,
+    padding: 8,
   },
   gridImage: {
     borderRadius: 21,
   },
+  gridRow: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   cell: {
-    width: '20%',
-    height: '20%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 2,
+    backgroundColor: 'rgba(255,255,255,0.06)',
+  },
+  cellBorderRight: {
+    borderRightWidth: 2,
+    borderRightColor: 'rgba(255,255,255,0.92)',
+  },
+  cellBorderBottom: {
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(255,255,255,0.92)',
   },
   cellMarked: {
-    backgroundColor: 'rgba(72,255,154,0.25)',
-    borderRadius: 10,
+    backgroundColor: 'rgba(72,255,154,0.28)',
   },
   cellNumber: {
     color: colors.white,
     fontWeight: '800',
-    fontSize: 16,
+    fontSize: 18,
     textShadowColor: 'rgba(0,0,0,0.55)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 3,
   },
   flag: {
-    width: 42,
-    height: 54,
+    width: 36,
+    height: 46,
     resizeMode: 'contain',
   },
   challengesTitle: {
