@@ -52,17 +52,25 @@ export function LobbyScreen({ navigation }: Props) {
               onPress={() => navigation.navigate('NewGame')}
             >
               <GreenButton style={styles.modeCard}>
-                <Image source={images.iconSolo} style={styles.modeIcon} />
+                <Image
+                  source={images.iconSolo}
+                  style={styles.modeIconSolo}
+                  accessibilityLabel="Solo"
+                />
                 <Text style={styles.modeLabel}>SOLO</Text>
               </GreenButton>
             </Pressable>
 
             <View style={styles.modePress}>
               <GreenButton style={styles.modeCard}>
-                <Image source={images.iconDuel} style={styles.modeIcon} />
+                <Image
+                  source={images.iconDuel}
+                  style={styles.modeIconDuel}
+                  accessibilityLabel="Duel"
+                />
                 <Text style={styles.modeLabel}>DUEL</Text>
               </GreenButton>
-              <View style={styles.grayOut} />
+              <View style={styles.grayOut} pointerEvents="none" />
               <View style={styles.comingSoon}>
                 <Text style={styles.comingSoonText}>Coming{'\n'}soon!</Text>
               </View>
@@ -70,10 +78,14 @@ export function LobbyScreen({ navigation }: Props) {
 
             <View style={styles.modePress}>
               <GreenButton style={styles.modeCard}>
-                <Image source={images.iconFoursome} style={styles.modeIconWide} />
+                <Image
+                  source={images.iconFoursome}
+                  style={styles.modeIconFoursome}
+                  accessibilityLabel="Foursome"
+                />
                 <Text style={styles.modeLabel}>FOURSOME</Text>
               </GreenButton>
-              <View style={styles.grayOut} />
+              <View style={styles.grayOut} pointerEvents="none" />
               <View style={styles.comingSoon}>
                 <Text style={styles.comingSoonText}>Coming{'\n'}soon!</Text>
               </View>
@@ -211,22 +223,29 @@ const styles = StyleSheet.create({
   modeCard: {
     height: 101,
     borderRadius: 9,
-    gap: 8,
+    gap: 6,
+    paddingTop: 10,
+    paddingBottom: 8,
   },
-  modeIcon: {
-    width: 30,
-    height: 40,
+  modeIconSolo: {
+    width: 34,
+    height: 44,
     resizeMode: 'contain',
   },
-  modeIconWide: {
-    width: 42,
-    height: 34,
+  modeIconDuel: {
+    width: 40,
+    height: 42,
+    resizeMode: 'contain',
+  },
+  modeIconFoursome: {
+    width: 48,
+    height: 42,
     resizeMode: 'contain',
   },
   modeLabel: {
     color: colors.white,
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 13,
   },
   grayOut: {
     ...StyleSheet.absoluteFillObject,
