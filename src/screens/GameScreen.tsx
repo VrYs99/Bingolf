@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 /** Wide frosted gutters matching Figma Layer_1 grid */
-const GRID_LINE = 7;
+const GRID_LINE = 12;
 const GRID_LINE_COLOR = 'rgba(255,255,255,0.42)';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -188,8 +188,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
-    // Match gridFrame border (7) + grid padding (6) so letters sit over columns
-    paddingHorizontal: 13,
+    // Match gridFrame border (12) + grid padding (4) so letters sit over columns
+    paddingHorizontal: 16,
   },
   bingoHeaderCell: {
     flex: 1,
@@ -212,9 +212,9 @@ const styles = StyleSheet.create({
   gridFrame: {
     width: '100%',
     aspectRatio: 1,
-    borderRadius: 28,
-    borderWidth: 7,
-    borderColor: 'rgba(255,255,255,0.72)',
+    borderRadius: 32,
+    borderWidth: 12,
+    borderColor: 'rgba(255,255,255,0.42)',
     overflow: 'hidden',
     backgroundColor: 'rgba(255,255,255,0.08)',
     shadowColor: '#000',
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     flex: 1,
-    padding: 6,
+    padding: 4,
   },
   gridImage: {
     borderRadius: 21,
