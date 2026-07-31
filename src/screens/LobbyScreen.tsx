@@ -33,10 +33,15 @@ export function LobbyScreen({ navigation }: Props) {
           <GlassPanel style={styles.profileCard}>
             <Text style={styles.name}>{PLAYER.name}</Text>
             <View style={styles.profileRow}>
-              <GreenButton style={styles.achievement}>
-                <Text style={styles.achievementText}>Achievement</Text>
-                <TrophyIcon width={16} height={17} />
-              </GreenButton>
+              <Pressable
+                onPress={() => navigation.navigate('Achievements')}
+                hitSlop={8}
+              >
+                <GreenButton style={styles.achievement}>
+                  <Text style={styles.achievementText}>Achievement</Text>
+                  <TrophyIcon width={16} height={17} />
+                </GreenButton>
+              </Pressable>
               <Text style={styles.points}>
                 {PLAYER.points} <Text style={styles.pts}>pts</Text>
               </Text>

@@ -4,4 +4,5 @@ export type RootStackParamList = {
   Lobby: undefined;
   NewGame: undefined;
   Game: { setup: SoloSetup };
+  Achievements: undefined;
 };
